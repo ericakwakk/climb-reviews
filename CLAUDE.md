@@ -50,7 +50,7 @@ Tags are the core feature, not decoration. Climbers pick them from a fixed list,
 
 ### How criteria are classified
 - Fact (true/false, stored on the gym): climbing type.
-- Rating (1–5, has a better and worse): overall, setting quality, value, community.
+- Rating (1–5, has a better and worse): overall, setting quality, value, community (how welcoming it is). Community is shown up front: on every gym card and near the top of the gym page.
 - Tag (about fit, not quality; counted): grading, setting style, who it suits, crowding, setting frequency, amenities.
 - Written review: everything else.
 

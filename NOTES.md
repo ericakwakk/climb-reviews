@@ -52,3 +52,9 @@
 
 ### Scope
 - No deadline, no cut features. Build in four levels (core loop → differentiators → growth → polish) so there's always a deployable site.
+
+## Day 2 — 2026-10-06
+
+### Community
+- **Community is a star rating, not a tag.** Four ratings: overall, setting, value, community. Tried a community tag (Easy to make friends / Some socialization / People keep to themselves) but cut it: one community question in the form is enough.
+- **Community goes up front:** the community rating shows on every gym card and near the top of the gym page. Google reviews never capture this.
