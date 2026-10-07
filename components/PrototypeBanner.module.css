@@ -1,0 +1,13 @@
+.banner {
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--color-ink);
+  color: var(--color-background);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  text-align: center;
+}
+
+.banner strong {
+  color: var(--color-hold-yellow);
+}

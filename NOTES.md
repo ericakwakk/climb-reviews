@@ -125,3 +125,10 @@
 - **Review cards now highlight overall, not community**, matching the rest of the site.
 - **Custom dropdown arrows** site-wide; the browser's default arrow sat too close to the edge.
 - **Version A cards have no image anymore.** Every card repeated the same plywood-with-holds picture, echoing the hero. Now the hero is the page's one illustration moment, and cards are text-first: type label, name, neighborhood, rating + day pass on one line, top tags.
+
+### Map view (Day 3)
+- **Google Maps for the list's map view** (per the plan), via @vis.gl/react-google-maps. Set up the Google Cloud project "climb-reviews": Maps JavaScript API only (unchecked "enable all Maps APIs"), a browser key restricted to my websites and that one API, and a Map ID (vector, no tilt/rotation: a flat north-up map is clearer for finding gyms).
+- **Rotated the key** after accidentally sharing it in a screenshot. Keys live in Bitwarden (folder: climb-reviews) and .env.local, never in chat or GitHub.
+- **Pins show the overall rating** (closed MPHC is a grey "Closed" pin). Tapping a pin grows a preview card on the map instead of jumping to a new page. The map follows the same filters as the list and zooms to fit the results.
+- **Usage safety:** billed per map load (opening the map), not per interaction. Budget alert at $5 on real usage. Google wouldn't let this account adjust the daily/per-minute map-load quotas, so the safety net is the free trial (no charges without upgrading), the budget alert, and locking the key to my exact site at deploy. Revisit caps before ever upgrading.
+- **Not searchable while it's a prototype:** "noindex" in every page's code plus an X-Robots-Tag header on every response. robots.txt allows crawling on purpose: blocking it would hide the noindex instructions, and a shared link could still get listed. Remove all of it at launch.

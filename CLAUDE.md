@@ -98,6 +98,7 @@ No deadline and no cut features. Build in this order so there's always a finishe
 - Morphing UI: ReviewComposer morphs its button into a review sheet (same view-transition name on both). Prefer expanding components in place over sending people to a new page.
 - Save buttons store choices in localStorage until sign-in exists; they move to saved_gyms later.
 - Gym page map: components/GymMap.js, an OpenStreetMap embed using coordinates from Nominatim (scripts/geocode-gyms.py). Swap to Google Maps JS later without changing pages.
+- List map view: components/GymsMap.js, Google Maps JS via @vis.gl/react-google-maps. Needs NEXT_PUBLIC_GOOGLE_MAPS_KEY and NEXT_PUBLIC_GOOGLE_MAP_ID in .env.local (and in Vercel's environment variables). Pins show the overall rating; tapping one opens a preview card on the map. Uses the same filtered results as the list. Google project: climb-reviews; key restricted to localhost:3000 and *.vercel.app, Maps JavaScript API only.
 - Shared components are themed by CSS variables (--filter-*, --composer-*, --save-*, --map-*); version B overrides them in app/b/zine.css.
 
 ## Responsive rules (every page, every change)
@@ -123,6 +124,12 @@ No deadline and no cut features. Build in this order so there's always a finishe
 - View toggles (cards/list vs map) use icons, not words.
 - Type: Bricolage Grotesque ExtraBold for display, DM Sans for body.
 - View transitions and shape morphing with Motion (level 4).
+
+## Google Cloud safety checklist (before deploy / before upgrading the free trial)
+- Free trial (ends Jan 2027) never charges the card unless upgraded. Budget alert set: $5/month on real usage (credits excluded), alerts at 50/90/100%.
+- Daily and per-minute map-load quotas are NOT adjustable on this account. Before upgrading to a paid account, revisit caps (or add an automated budget-triggered shutoff).
+- At deploy: replace the key's `https://*.vercel.app/*` referrer with the exact site address, and add NEXT_PUBLIC_GOOGLE_MAPS_KEY + NEXT_PUBLIC_GOOGLE_MAP_ID to Vercel's environment variables.
+- Map view reuses one map instance (`reuseMaps`) so switching views doesn't create extra billed map loads.
 
 ## Open questions (decide, then log in NOTES.md)
 - Seed NYC with my own tags and reviews before importing other states?

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ViewTransition } from "react";
+import { startTransition, useState, ViewTransition } from "react";
 import FilterDropdown from "@/components/FilterDropdown";
 import GymRow from "@/components/b/GymRow";
+import GymsMap from "@/components/GymsMap";
 import RockWall from "@/components/b/RockWall";
 import { ListIcon, MapIcon } from "@/components/icons";
 import { PRICE_RANGES, SORT_OPTIONS } from "@/lib/gymDisplay";
@@ -16,6 +17,8 @@ import styles from "./HomeB.module.css";
 export default function HomeB({ gyms }) {
   const { query, setQuery, selected, toggle, clearAll, sort, setSort, results, active, openCount } =
     useGymFilters(gyms);
+  const [view, setView] = useState("list"); // "list" or "map"
+  const switchView = (v) => startTransition(() => setView(v));
 
   return (
     <main>
@@ -105,19 +108,23 @@ export default function HomeB({ gyms }) {
                 ))}
               </select>
             </label>
-            {/* List / Map toggle. The map view comes later. */}
+            {/* List / Map toggle */}
             <div className={styles.toggle} role="group" aria-label="View">
-              <button type="button" aria-pressed="true" aria-label="List view" title="List view">
+              <button type="button" aria-pressed={view === "list"} aria-label="List view" title="List view" onClick={() => switchView("list")}>
                 <ListIcon />
               </button>
-              <button type="button" aria-pressed="false" aria-label="Map view (coming soon)" title="Map view (coming soon)" disabled>
+              <button type="button" aria-pressed={view === "map"} aria-label="Map view" title="Map view" onClick={() => switchView("map")}>
                 <MapIcon />
               </button>
             </div>
           </div>
         </div>
 
-        {results.length > 0 ? (
+        {view === "map" ? (
+          <div className={styles.mapWrap}>
+            <GymsMap gyms={results} hrefFor={(slug) => `/b/gyms/${slug}`} />
+          </div>
+        ) : results.length > 0 ? (
           <div className={styles.rows}>
             {results.map((gym) => (
               <ViewTransition

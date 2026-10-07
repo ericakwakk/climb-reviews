@@ -100,3 +100,12 @@
   --save-on-bg: var(--zine-ink);
   --save-on-ink: var(--zine-paper);
 }
+
+/* Version B look for the map view's pins and preview card */
+.zine {
+  --map-pin-radius: 0;
+  --map-pin-ink: var(--zine-ink);
+  --map-pin-active: var(--zine-pink);
+  --map-card-radius: 0;
+  --map-card-shadow: 6px 6px 0 var(--zine-pink);
+}

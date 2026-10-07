@@ -1,4 +1,5 @@
 import { Anton, Bricolage_Grotesque, DM_Sans, Instrument_Sans, Space_Mono } from "next/font/google";
+import PrototypeBanner from "@/components/PrototypeBanner";
 import "./globals.css";
 
 // Fonts download at build time and are served from our own site.
@@ -13,6 +14,8 @@ export const metadata = {
   title: "Name TBD · Climbing gyms, rated and reviewed by climbers",
   description:
     "Discover climbing gyms through what actually matters: grading, setting style, community, value, and price, rated and reviewed by climbers.",
+  // Prototype: keep it out of search results (see also app/robots.js)
+  robots: { index: false, follow: false },
 };
 
 // The root layout wraps every page on the site. Each design version adds its own header/footer in its own layout.
@@ -21,7 +24,10 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={fonts}>
-      <body>{children}</body>
+      <body>
+        <PrototypeBanner />
+        {children}
+      </body>
     </html>
   );
 }

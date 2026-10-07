@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ViewTransition } from "react";
+import { startTransition, useState, ViewTransition } from "react";
 import FilterDropdown from "@/components/FilterDropdown";
 import GymCard from "@/components/GymCard";
+import GymsMap from "@/components/GymsMap";
 import HeroWall from "@/components/HeroWall";
 import Carabiner from "@/components/illustrations/Carabiner";
 import { GridIcon, MapIcon } from "@/components/icons";
@@ -16,6 +17,8 @@ import styles from "./HomeA.module.css";
 export default function HomeA({ gyms }) {
   const { query, setQuery, selected, toggle, clearAll, sort, setSort, results, active, openCount } =
     useGymFilters(gyms);
+  const [view, setView] = useState("cards"); // "cards" or "map"
+  const switchView = (v) => startTransition(() => setView(v));
 
   return (
     <main>
@@ -120,19 +123,21 @@ export default function HomeA({ gyms }) {
               </select>
             </label>
 
-            {/* Cards / Map toggle. The map view comes later. */}
+            {/* Cards / Map toggle */}
             <div className={styles.toggle} role="group" aria-label="View">
-              <button type="button" aria-pressed="true" aria-label="Card view" title="Card view">
+              <button type="button" aria-pressed={view === "cards"} aria-label="Card view" title="Card view" onClick={() => switchView("cards")}>
                 <GridIcon />
               </button>
-              <button type="button" aria-pressed="false" aria-label="Map view (coming soon)" title="Map view (coming soon)" disabled>
+              <button type="button" aria-pressed={view === "map"} aria-label="Map view" title="Map view" onClick={() => switchView("map")}>
                 <MapIcon />
               </button>
             </div>
           </div>
         </div>
 
-        {results.length > 0 ? (
+        {view === "map" ? (
+          <GymsMap gyms={results} hrefFor={(slug) => `/gyms/${slug}`} />
+        ) : results.length > 0 ? (
           <ul className={styles.grid}>
             {results.map((gym) => (
               // Each card animates: it slides to its new spot when the order changes,

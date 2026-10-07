@@ -250,3 +250,7 @@
   font-size: var(--text-2xl);
   text-transform: uppercase;
 }
+
+.mapWrap {
+  padding-top: var(--spacing-6);
+}
