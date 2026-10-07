@@ -77,11 +77,13 @@ Tags describe style and fit, never quality (quality belongs in ratings). A tag m
 - `/` landing: straightforward, no hook line. Title ("Find a climbing gym"), one-line subtitle, search (gym or city), then filters and the gym list right away. Filters are one dropdown per category (Grading, Setting style, Who it suits, Crowding, Setting frequency, Amenities, Price), each with checkboxes. Sort covers every rating plus price: Top rated, Best community, Best setting, Best value, Day pass low/high, Most reviewed, Name A–Z. Card/map toggle uses icons.
 - Gym lists are in no particular order visually: never number them (reads as a ranking).
 - `/gyms/[slug]` gym detail: top tags with counts, climber-flagged amenities, site ratings and reviews, Google rating badge, links to the gym's website and Google Maps, photo gallery, favorite, want-to-visit and visited buttons, review flow (ratings + tag picker + amenity checklist + text)
-- `/submit` submit a missing gym
+- `/submit` suggest a missing gym (form works; saving waits for the database)
+- `/login` log in or sign up with an email magic link (form works; sending waits for Supabase Auth)
+- `/terms`, `/privacy`: plain-English drafts in components/pages/ (not legal advice; review before public launch; update Privacy whenever data handling changes). Contact email lives in lib/site.js (CONTACT_EMAIL, currently null = hidden).
+- No About page for now (decided: landing page explains the site; the story goes in the portfolio case study).
+- Every page exists in both versions: `/x` (A) and `/b/x` (B); shared content lives in components/pages/.
 - `/saved` the signed-in user's Favorites, Want to visit and Visited lists (private, not a profile)
-- `/about`
 - MPHC (Manhattan Plaza Health Club climbing gym: 482 W 43rd St, Hell's Kitchen; opened 1992 in a former racquetball court; per the club, NYC's first commercial climbing gym; closed Sept 30, 2026 after 34 years; bouldering, top rope and lead) is a regular gym with status "closed". Its card sits last in the gym list in black and white with a "Closed · 1992–2026" label. Its page (`/gyms/mphc`, and `/mphc` redirects there) uses the normal gym page style, with its story (intro, numbers, timeline, photos, memories, sources) in place of ratings, prices, reviews and save buttons. Story content lives in lib/closedGyms.js. Every fact needs a source: a published one (listed on the page) or my own firsthand knowledge. Never invent quotes or memories.
-- `/login`, `/terms`, `/privacy`
 
 ## Build order
 No deadline and no cut features. Build in this order so there's always a finished, deployable site:

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_EMAIL } from "@/lib/site";
 import styles from "./ZineFooter.module.css";
 
 export default function ZineFooter() {
@@ -7,10 +8,11 @@ export default function ZineFooter() {
       <p className={styles.big}>Name TBD</p>
       <div className={`mono ${styles.row}`}>
         <nav className={styles.links} aria-label="Footer">
-          <Link href="/about">About</Link>
-          <Link href="/submit">Suggest a gym</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/privacy">Privacy</Link>
+          <Link href="/b/saved">Saved gyms</Link>
+          <Link href="/b/submit">Suggest a gym</Link>
+          <Link href="/b/terms">Terms</Link>
+          <Link href="/b/privacy">Privacy</Link>
+          {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>}
         </nav>
         {/* Required credit: gym locations come from OpenStreetMap */}
         <p>

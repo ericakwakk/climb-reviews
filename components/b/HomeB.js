@@ -152,7 +152,7 @@ export default function HomeB({ gyms }) {
         )}
 
         {/* ---------- Missing a gym? ---------- */}
-        <Link href="/submit" className={styles.suggest}>
+        <Link href="/b/submit" className={styles.suggest}>
           <span className={styles.suggestBig}>Missing a gym?</span>
           <span className="mono">Suggest one and we&apos;ll add it →</span>
         </Link>

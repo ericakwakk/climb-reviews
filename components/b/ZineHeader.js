@@ -8,10 +8,9 @@ export default function ZineHeader() {
         Name TBD
       </Link>
       <nav className={`mono ${styles.nav}`} aria-label="Main">
-        <Link href="/about">About</Link>
-        <Link href="/saved">Saved</Link>
-        <Link href="/login">Log in</Link>
-        <Link href="/login" className={styles.signup}>Sign up</Link>
+        <Link href="/b/saved">Saved</Link>
+        <Link href="/b/login">Log in</Link>
+        <Link href="/b/login" className={styles.signup}>Sign up</Link>
       </nav>
     </header>
   );

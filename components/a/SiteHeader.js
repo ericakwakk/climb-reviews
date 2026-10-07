@@ -12,7 +12,6 @@ export default function SiteHeader() {
           <span>Name TBD</span>
         </Link>
         <nav className={styles.nav} aria-label="Main">
-          <Link href="/about" className={styles.navLink}>About</Link>
           <Link href="/saved" className={styles.navLink}>Saved</Link>
           <Link href="/login" className={styles.navLink}>Log in</Link>
           <Link href="/login" className={styles.signup}>Sign up</Link>
