@@ -1,0 +1,89 @@
+.rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2) var(--spacing-4);
+  border: none;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  float: left; /* lets the legend sit in the flex row like a normal element */
+}
+
+.label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  color: var(--composer-muted, var(--color-ink-muted));
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.star svg {
+  transition: transform 0.12s ease;
+}
+
+.star:hover svg {
+  transform: scale(1.12);
+}
+
+/* The real radio button is invisible but still focusable and clickable */
+.radio {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio:focus-visible + svg {
+  outline: 3px solid var(--color-hold-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.filled {
+  fill: var(--composer-star, var(--color-hold-yellow));
+  stroke: var(--composer-ink, var(--color-ink));
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.empty {
+  fill: none;
+  stroke: var(--composer-ink, var(--color-ink));
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.value {
+  min-width: 34px;
+  margin-left: var(--spacing-2);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

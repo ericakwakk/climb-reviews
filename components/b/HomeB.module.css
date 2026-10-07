@@ -1,0 +1,252 @@
+/* ---------- Search panel on the rock wall ---------- */
+.panel {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8);
+  border: 3px solid var(--zine-ink);
+  background: var(--zine-paper);
+  box-shadow: 8px 8px 0 var(--zine-pink);
+}
+
+.title {
+  font-size: clamp(44px, 8vw, var(--text-4xl));
+  line-height: 0.88;
+}
+
+.lede {
+  font-size: var(--text-lg);
+  line-height: 1.4;
+}
+
+.search {
+  display: flex;
+  border: 3px solid var(--zine-ink);
+  background: var(--zine-paper);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-4);
+  border: none;
+  background: transparent;
+  font-size: var(--text-lg);
+  outline: none;
+}
+
+.search button {
+  padding: 0 var(--spacing-6);
+  border: none;
+  border-left: 3px solid var(--zine-ink);
+  background: var(--zine-yellow);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background: var(--zine-pink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: var(--spacing-6);
+    box-shadow: 5px 5px 0 var(--zine-pink);
+  }
+}
+
+/* ---------- Gym list ---------- */
+.list {
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  padding: var(--spacing-6) 0;
+  border-bottom: 1.5px solid var(--zine-ink);
+}
+
+.listHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) 0 var(--spacing-4);
+  border-bottom: 3px solid var(--zine-ink);
+}
+
+.listTitle {
+  font-size: clamp(40px, 9vw, var(--text-3xl));
+}
+
+.rightControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.rightControls > p {
+  color: var(--zine-ink-muted);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.sort select {
+  padding: 4px 8px;
+  border: 1.5px solid var(--zine-ink);
+  border-radius: 0;
+  background: var(--zine-paper);
+  font-family: var(--zine-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  border: 1.5px solid var(--zine-ink);
+}
+
+.toggle button {
+  display: grid;
+  place-items: center;
+  padding: 4px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.toggle button[aria-pressed="true"] {
+  background: var(--zine-ink);
+  color: var(--zine-paper);
+}
+
+/* ---------- Missing a gym? ---------- */
+.suggest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-12);
+  padding: var(--spacing-8);
+  background: var(--zine-texture);
+  border: 3px solid var(--zine-ink);
+}
+
+.suggestBig {
+  font-family: var(--zine-display);
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  background: var(--zine-paper);
+  padding: 0 var(--spacing-2);
+}
+
+.suggest .mono {
+  background: var(--zine-paper);
+  padding: 4px 8px;
+}
+
+.suggest:hover .suggestBig {
+  background: var(--zine-yellow);
+}
+
+/* Phones: filters become one row you swipe sideways (menus still open as bottom sheets) */
+@media (max-width: 640px) {
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: calc(var(--spacing-6) * -1);
+    padding-right: var(--spacing-6);
+    scrollbar-width: none;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filters > * {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .search button {
+    padding: 0 var(--spacing-3);
+  }
+
+  .panel {
+    padding: var(--spacing-4);
+  }
+}
+
+/* ---------- Active filter chips ---------- */
+.activeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-4);
+}
+
+.chip {
+  padding: 4px 10px;
+  border: 1.5px solid var(--zine-ink);
+  background: var(--zine-ink);
+  color: var(--zine-paper);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--zine-pink);
+  color: var(--zine-ink);
+}
+
+.clearAll {
+  padding: 4px 6px;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toggle button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- No results ---------- */
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) 0;
+  border-bottom: 1.5px solid var(--zine-ink);
+}
+
+.noResultsTitle {
+  font-family: var(--zine-display);
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+}

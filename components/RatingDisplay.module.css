@@ -1,0 +1,80 @@
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+}
+
+.label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.value span {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  margin-left: 2px;
+}
+
+.track {
+  height: 10px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--color-ink);
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Community: up front, big and pink ---------- */
+.highlight {
+  padding: var(--spacing-4);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+}
+
+.highlight .label {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.highlight .hint,
+.highlight .value span {
+  color: var(--color-ink);
+}
+
+.highlight .value {
+  font-size: var(--text-2xl);
+}
+
+.highlight .track {
+  height: 14px;
+}
+
+.highlight .hint {
+  white-space: nowrap;
+}

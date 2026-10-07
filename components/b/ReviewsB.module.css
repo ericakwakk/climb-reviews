@@ -1,0 +1,162 @@
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1.5px solid var(--zine-ink);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.topic {
+  padding: 4px 10px;
+  border: 1.5px solid var(--zine-ink);
+  background: var(--zine-paper);
+  cursor: pointer;
+}
+
+.topic sup {
+  font-weight: 700;
+  color: var(--zine-blue);
+}
+
+.topic:hover {
+  background: var(--zine-pink-tint);
+}
+
+.topic[aria-pressed="true"] {
+  background: var(--zine-ink);
+  color: var(--zine-paper);
+}
+
+.topic[aria-pressed="true"] sup {
+  color: var(--zine-yellow);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.search {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  border: 1.5px solid var(--zine-ink);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.sort select {
+  padding: 6px 8px;
+  border: 1.5px solid var(--zine-ink);
+  border-radius: 0;
+  background: var(--zine-paper);
+  font-family: var(--zine-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+}
+
+/* ---------- Review pull quotes ---------- */
+.review {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-6) 0 var(--spacing-6) var(--spacing-16);
+  border-bottom: 1.5px solid var(--zine-ink);
+  background: var(--zine-paper);
+}
+
+.quoteMark {
+  position: absolute;
+  left: 0;
+  top: var(--spacing-2);
+  font-family: var(--zine-display);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--zine-pink);
+}
+
+.reviewBody {
+  font-size: var(--text-lg);
+  line-height: 1.4;
+  max-width: var(--container-prose);
+}
+
+.reviewScores {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--zine-ink-muted);
+}
+
+.reviewOverall {
+  padding: 2px 8px;
+  background: var(--zine-pink);
+  color: var(--zine-ink);
+}
+
+.reviewTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+@media (max-width: 640px) {
+  .review {
+    padding-left: var(--spacing-8);
+  }
+
+  .quoteMark {
+    font-size: 56px;
+  }
+}
+
+.empty {
+  padding: var(--spacing-6) 0;
+  color: var(--zine-ink-muted);
+}
+
+.empty button {
+  border: none;
+  background: none;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Optional climber info: grade, height, etc. */
+.about {
+  align-self: flex-start;
+  padding: 2px 8px;
+  border: 1.5px solid var(--zine-ink);
+  background: var(--zine-yellow);
+}

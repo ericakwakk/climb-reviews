@@ -1,0 +1,48 @@
+.wall {
+  position: relative;
+  border-bottom: 3px solid var(--zine-ink);
+  background: var(--zine-texture);
+  overflow: hidden;
+}
+
+/* Illustrations fill the wall behind the content */
+.art {
+  position: absolute;
+  inset: 0;
+}
+
+.art > * {
+  position: absolute;
+}
+
+.v1 { left: 56%; top: 8%; }
+.v2 { left: 76%; top: 44%; }
+.v3 { left: 82%; top: 2%; }
+
+.h1 { left: 64%; top: 64%; }
+.h2 { left: 74%; top: 22%; }
+.h3 { left: 92%; top: 74%; }
+.h4 { left: 50%; top: 76%; }
+
+/* The search panel area: same width as the page content, panel on the left */
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: var(--spacing-12) var(--spacing-6);
+}
+
+@media (max-width: 900px) {
+  .v1 { left: 62%; top: 2%; width: 150px; }
+  .v2,
+  .v3,
+  .h2,
+  .h3 { display: none; }
+  .h1 { left: 78%; top: 70%; }
+  .h4 { display: none; }
+
+  .content {
+    padding: var(--spacing-24) var(--spacing-4) var(--spacing-6);
+  }
+}

@@ -1,0 +1,107 @@
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px var(--spacing-3);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.topic span {
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.topic:hover {
+  border-color: var(--color-ink);
+}
+
+.topic[aria-pressed="true"] {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-background);
+}
+
+.topic[aria-pressed="true"] span {
+  color: var(--color-background);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.search {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 0 var(--spacing-3);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink-muted);
+}
+
+.search:focus-within {
+  border-color: var(--color-ink);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-2) 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--color-ink);
+}
+
+.sort select {
+  height: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.empty {
+  padding: var(--spacing-6) 0;
+  color: var(--color-ink-muted);
+}
+
+.empty button {
+  border: none;
+  background: none;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

@@ -1,0 +1,85 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-6) 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+  background: var(--color-hold-yellow);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.author {
+  font-weight: var(--font-weight-semibold);
+}
+
+.date {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.scores > div {
+  display: flex;
+  gap: 6px;
+  padding: 2px var(--spacing-3);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+}
+
+.scores dt {
+  color: var(--color-ink-muted);
+}
+
+.scores dd {
+  font-weight: var(--font-weight-bold);
+}
+
+.scores > .overall {
+  border-color: var(--color-ink);
+  background: var(--color-primary);
+}
+
+.scores > .overall dt {
+  color: var(--color-ink);
+}
+
+.body {
+  max-width: var(--container-prose);
+  font-size: var(--text-base);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+/* Optional climber info: grade, height, etc. */
+.about {
+  margin-top: 2px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink);
+}

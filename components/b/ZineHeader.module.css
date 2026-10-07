@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-4);
+  max-width: var(--container-page);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-4) var(--spacing-6);
+  border-bottom: 3px solid var(--zine-ink);
+}
+
+.wordmark {
+  font-family: var(--zine-display);
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--zine-pink);
+  text-decoration-thickness: 3px;
+}
+
+.signup {
+  padding: 4px var(--spacing-3);
+  background: var(--zine-pink);
+  border: 2px solid var(--zine-ink);
+}
+
+@media (max-width: 720px) {
+  .header {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  .nav {
+    gap: var(--spacing-3);
+  }
+
+  .nav > :nth-child(-n + 2) {
+    display: none;
+  }
+}

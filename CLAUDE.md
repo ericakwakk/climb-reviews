@@ -8,15 +8,15 @@ Tags are the core feature, not decoration. Climbers pick them from a fixed list,
 
 ## How to work with me
 - I'm a junior product designer learning design engineering. Strong in HTML, CSS and Git; new to JavaScript and React.
-- Teach as you go. Explain every new concept briefly the first time it appears.
-- Let me hand-write the first version of each new concept. Give me the pieces and check my work; don't write it for me unless I ask.
+- Automate: write the code and run the steps for me. Briefly explain new concepts or steps that deserve it.
+- Bias toward building something tangible and iterating. Fill in information gaps as we go instead of planning everything up front.
 - Keep explanations short and direct.
 - Log decisions (with the reason) in NOTES.md.
 
 ## Stack
 - Next.js App Router, plain JavaScript (no TypeScript), no src/ directory.
 - CSS Modules for component styles; design tokens as CSS variables in app/globals.css. No Tailwind.
-- Token names come from Paper (my only design tool) and must match the CSS variable names exactly.
+- Design happens in code for now (Paper is paused: free plan's weekly MCP limit). Token names in app/globals.css match the tokens in the Paper file "Design system v1" exactly; keep them in sync if Paper resumes.
 - Supabase: database, RLS, email magic-link auth. Reviews are written with Server Actions.
 - Google Maps Platform: Maps JavaScript API via @vis.gl/react-google-maps; Places API (New) for ratings. Never the legacy Places API.
 - Motion for animation. Hosted on Vercel.
@@ -35,11 +35,19 @@ Tags are the core feature, not decoration. Climbers pick them from a fixed list,
 - Allowed sources: my own photos; gym photos with written permission (credit the gym, e.g. "Photo: Brooklyn Boulders"); user uploads.
 - User uploads: the Terms page must say uploaders own the photo and grant permission to display it. Uploads need moderation before showing.
 - No Google Place Photos. Keeps costs down and keeps Google content out of the climbers' view.
-- Gyms without photos get an illustrated header (holds, ropes, carabiners), not a gray placeholder.
+- No banner image on gym pages. Photos only appear in the photo gallery once someone uploads them; no placeholder art in their place.
+
+## Gym data (for now)
+- data/nyc-gyms.csv is the source of truth for NYC gym facts (same data as the "NYC Climbing Gyms" Google Sheet). Run `python3 scripts/csv-to-gyms.py` to regenerate data/gyms.js; never edit gyms.js by hand.
+- Facts were verified against each gym's official site (Oct 2026). Ratings, tags and reviews in gyms.js are SAMPLE content flagged `sample: true`, shown with a "Sample data" label. Never ship sample reviews or made-up Google ratings to the live site.
+- The CSV has a Status column. Closed gyms (MPHC) are kept in gyms.js with status "closed", listed last, and not counted in "N gyms". Chelsea Piers Fitness was removed (members-only).
 
 ## Data model
-- gyms: id, slug, name, neighborhood, type (bouldering / ropes / both), website, google_place_id, latitude, longitude
+- gyms: id, slug, name, address, neighborhood, city, state, type (bouldering / ropes / both), website, google_place_id, latitude, longitude, day_pass_price, membership_price, prices_checked_at
+  - Not yet in Supabase: address, day_pass_price, membership_price, prices_checked_at (add with ALTER TABLE when connecting real data).
+  - Prices are facts I enter, shown with "as of <month>" and a link to the gym's site. Cards show the day pass price; the gym page shows day pass + monthly membership.
 - reviews: id, gym_id → gyms.id, user_id → auth.users.id, overall, setting, value, community (1–5), body, created_at
+  - Optional "About you" fields (all nullable, shown on the review): boulder_grade_range, rope_grade_range, height_range, gender, age_range. Options live in lib/climberInfo.js. Never required, never inferred; the privacy page must mention them.
 - tags: id, slug, label, category. A fixed list I manage; users can't create tags. Categories and tags are listed under "Tag list" below.
 - review_tags: review_id → reviews.id, tag_id → tags.id. Picked in the review form, so each review carries its own tags.
 - Amenities are tags with category = 'amenity', flagged by climbers in the review form (not entered by me). The gym page shows only amenities climbers have flagged, labeled "Climbers mention", with counts.
@@ -50,7 +58,7 @@ Tags are the core feature, not decoration. Climbers pick them from a fixed list,
 
 ### How criteria are classified
 - Fact (true/false, stored on the gym): climbing type.
-- Rating (1–5, has a better and worse): overall, setting quality, value, community (how welcoming it is). Community is shown up front: on every gym card and near the top of the gym page.
+- Rating (1–5, has a better and worse): overall, setting quality, value, community (how welcoming it is). Overall is the headline rating: gym cards/rows show only the overall star rating; the gym page highlights overall and shows the other three below it.
 - Tag (about fit, not quality; counted): grading, setting style, who it suits, crowding, setting frequency, amenities.
 - Written review: everything else.
 
@@ -66,12 +74,13 @@ Pick any unless marked "pick one".
 Tags describe style and fit, never quality (quality belongs in ratings). A tag must differ between gyms; something every gym has (e.g. "crimpy") isn't a tag.
 
 ## Pages
-- `/` landing: hero + gym list, card/map toggle, search (gym or city), tag filters, sort
+- `/` landing: straightforward, no hook line. Title ("Find a climbing gym"), one-line subtitle, search (gym or city), then filters and the gym list right away. Filters are one dropdown per category (Grading, Setting style, Who it suits, Crowding, Setting frequency, Amenities, Price), each with checkboxes. Sort covers every rating plus price: Top rated, Best community, Best setting, Best value, Day pass low/high, Most reviewed, Name A–Z. Card/map toggle uses icons.
+- Gym lists are in no particular order visually: never number them (reads as a ranking).
 - `/gyms/[slug]` gym detail: top tags with counts, climber-flagged amenities, site ratings and reviews, Google rating badge, links to the gym's website and Google Maps, photo gallery, favorite, want-to-visit and visited buttons, review flow (ratings + tag picker + amenity checklist + text)
 - `/submit` submit a missing gym
 - `/saved` the signed-in user's Favorites, Want to visit and Visited lists (private, not a profile)
 - `/about`
-- `/mphc` hand-built memorial for MPHC (closed Sept 30, 2026). Static and quieter in tone; no ratings or form.
+- MPHC (Manhattan Plaza Health Club climbing gym: 482 W 43rd St, Hell's Kitchen; opened 1992 in a former racquetball court; per the club, NYC's first commercial climbing gym; closed Sept 30, 2026 after 34 years; bouldering, top rope and lead) is a regular gym with status "closed". Its card sits last in the gym list in black and white with a "Closed · 1992–2026" label. Its page (`/gyms/mphc`, and `/mphc` redirects there) uses the normal gym page style, with its story (intro, numbers, timeline, photos, memories, sources) in place of ratings, prices, reviews and save buttons. Story content lives in lib/closedGyms.js. Every fact needs a source: a published one (listed on the page) or my own firsthand knowledge. Never invent quotes or memories.
 - `/login`, `/terms`, `/privacy`
 
 ## Build order
@@ -81,8 +90,39 @@ No deadline and no cut features. Build in this order so there's always a finishe
 3. Growth: search, saved gyms (favorites, want to visit, visited), submit a gym, national import.
 4. Polish and play: view transitions, shape morphing, animated illustrations, photo gallery.
 
-## Visual direction
-Colorful UI with climbing illustrations (holds, ropes, carabiners). View transitions and shape morphing with Motion.
+## Interactivity (how it's built)
+- Pages stay server components; interactive parts are client components ("use client"): components/a/HomeA.js, components/b/HomeB.js, ReviewsA/ReviewsB, ReviewComposer, SaveButtons, FilterDropdown, RatingInput.
+- Shared logic lives in hooks, not duplicated per version: lib/useGymFilters.js (search, filters, sort for the gym list; pure functions in lib/gymFilters.js) and lib/useReviewFilters.js (topic chips, search, sort for reviews).
+- Filter rules: within a tag category any pick matches; across categories all must match; amenities require every pick; price uses day pass ranges (Under $30, $30–$35, Over $35). Closed gyms only show when no filters are on, and always sort last.
+- View transitions use React's <ViewTransition> (no config needed in Next 16; see node_modules/next/dist/docs/01-app/02-guides/view-transitions.md). State changes that should animate go through startTransition. Gym names morph card/row → page title (name `gym-name-<slug>`). Links into a gym use transitionTypes={["nav-forward"]}, back links ["nav-back"]. Pages are wrapped in components/PageTransition.js. Animation CSS is at the bottom of app/globals.css, including prefers-reduced-motion.
+- Morphing UI: ReviewComposer morphs its button into a review sheet (same view-transition name on both). Prefer expanding components in place over sending people to a new page.
+- Save buttons store choices in localStorage until sign-in exists; they move to saved_gyms later.
+- Gym page map: components/GymMap.js, an OpenStreetMap embed using coordinates from Nominatim (scripts/geocode-gyms.py). Swap to Google Maps JS later without changing pages.
+- Shared components are themed by CSS variables (--filter-*, --composer-*, --save-*, --map-*); version B overrides them in app/b/zine.css.
+
+## Responsive rules (every page, every change)
+- One responsive site, no separate mobile version. Must work from 320px phones to 1920px+ monitors, in portrait and landscape.
+- Check at 320, 375, 414, 768, 1024, 1280 and 1920 wide: nothing scrolls sideways, no text spills out of its box.
+- Grid columns use minmax(0, …) so long content can't force them wider; long words wrap (overflow-wrap on headings), never hyphenate short ones.
+- Touch screens: anything tappable is at least 44px tall (global rule in globals.css).
+- Phones: filter menus open as bottom sheets; the filter row scrolls sideways instead of stacking.
+- Big display type uses clamp() with a small-phone minimum.
+
+## Design versions (comparing, temporary)
+- Version A (plywood wall, sticker style): `/` and `/gyms/[slug]`. Files in app/(a)/ and components/ (+ components/a/ for header/footer).
+- Version B (bold riso zine, several riso ink colors): `/b` and `/b/gyms/[slug]`. Files in app/b/ and components/b/. Its tokens are scoped to `.zine` in app/b/zine.css. Rock-wall texture (public/illustrations/rock-wall.jpg, made by scripts/make-rock-texture.py) is used for the home page rock band and callout boxes, never as a gym banner.
+- Both share data/, lib/, and the root layout (fonts). Once one is picked, delete the other.
+
+## Visual direction (version A)
+- A fresh plywood wall, a bucket of new holds, and the setter's tape. References: Pinterest "bouldering" (plywood walls with t-nut dot grids, hold flat-lays, zine/club posters, marker scribbles, cute illustrated holds).
+- White pages (--color-background). Plywood + dot grid only on feature surfaces: hero, card headers, illustrations.
+- One primary accent: pink hold (--color-primary), used for main buttons and the overall rating highlight.
+- Each tag category has its own icon (components/Glyph.js), shown on a dot of the category's color. Icons are the main identifier, color is secondary. Amenities and price get icons on a neutral dot.
+- Illustrations: flat holds with ink outlines and a bolt hole, carabiners, and volumes. Components in components/illustrations/. (Rope and setter's tape were tried and cut: they looked random.)
+- Volumes are POINTED shapes (three-sided pyramids, diamonds, fins), never cubes. They have bolt holes and often holds screwed onto their faces.
+- View toggles (cards/list vs map) use icons, not words.
+- Type: Bricolage Grotesque ExtraBold for display, DM Sans for body.
+- View transitions and shape morphing with Motion (level 4).
 
 ## Open questions (decide, then log in NOTES.md)
 - Seed NYC with my own tags and reviews before importing other states?

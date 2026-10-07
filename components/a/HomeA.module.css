@@ -1,0 +1,296 @@
+/* ---------- Top ---------- */
+.top {
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: var(--spacing-12) var(--spacing-6) var(--spacing-8);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.title {
+  font-size: clamp(44px, 6vw, var(--text-3xl));
+}
+
+.lede {
+  max-width: 32rem;
+  font-size: var(--text-lg);
+  line-height: 1.4;
+  color: var(--color-ink-muted);
+}
+
+/* Search bar */
+.search {
+  display: flex;
+  align-items: center;
+  max-width: 36rem;
+  margin-top: var(--spacing-2);
+  padding: 6px 6px 6px var(--spacing-4);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--color-ink-muted);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-3);
+  border: none;
+  background: transparent;
+  font-size: var(--text-base);
+  outline: none;
+}
+
+.search button {
+  padding: var(--spacing-3) var(--spacing-6);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-primary-ink);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: var(--spacing-8);
+    gap: var(--spacing-6);
+  }
+}
+
+/* ---------- Toolbar + list ---------- */
+.list {
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+.toolbar {
+  padding: var(--spacing-4) 0;
+  border-top: 2px solid var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.listHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin: var(--spacing-6) 0;
+}
+
+.count {
+  color: var(--color-ink-muted);
+}
+
+.count strong {
+  color: var(--color-ink);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sort select {
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  padding: 3px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+}
+
+.toggle button {
+  display: grid;
+  place-items: center;
+  padding: 6px var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  cursor: pointer;
+}
+
+.toggle button[aria-pressed="true"] {
+  background: var(--color-ink);
+  color: var(--color-background);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
+  gap: var(--spacing-6);
+}
+
+/* ---------- Missing a gym? ---------- */
+.suggest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-12);
+  padding: var(--spacing-6);
+  border: 2px dashed var(--color-ink);
+  border-radius: var(--radius-lg);
+}
+
+.suggest > div {
+  flex: 1;
+}
+
+.suggestTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.suggestText {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.suggestLink {
+  padding: var(--spacing-2) var(--spacing-4);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+.suggestLink:hover {
+  background: var(--color-surface);
+}
+
+/* Phones: filters become one row you swipe sideways (menus still open as bottom sheets) */
+@media (max-width: 640px) {
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: calc(var(--spacing-6) * -1);
+    padding-right: var(--spacing-6);
+    scrollbar-width: none;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filters > * {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .search button {
+    padding: var(--spacing-2) var(--spacing-4);
+  }
+}
+
+/* ---------- Active filter chips ---------- */
+.activeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-3);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 4px var(--spacing-3);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-background);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--color-primary);
+  color: var(--color-primary-ink);
+}
+
+.clearAll {
+  padding: 4px var(--spacing-2);
+  border: none;
+  background: none;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toggle button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- No results ---------- */
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8);
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius-lg);
+  color: var(--color-ink-muted);
+}
+
+.noResultsTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-ink);
+}

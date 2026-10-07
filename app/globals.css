@@ -1,17 +1,89 @@
+/* ============================================================
+   Design tokens
+   Names match the Paper file "Design system v1" exactly.
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutrals */
+  --color-background: #ffffff;   /* fresh-painted wall: page background */
+  --color-surface: #f6f3ee;      /* chalk dust: subtle surfaces, chips, inputs */
+  --color-ink: #1a1714;          /* shoe rubber: text, outlines */
+  --color-ink-muted: #5e574f;    /* secondary text */
+  --color-line: #e7e1d8;         /* hairlines */
+  --color-plywood: #ebcba0;      /* plywood panel: feature surfaces only */
+  --color-plywood-dot: #b98f5f;  /* t-nut bolt holes */
+
+  /* Primary: the pink hold. Buttons, community rating, highlights. */
+  --color-primary: #ff4f9a;
+  --color-primary-ink: #1a1714;
+
+  /* Circuit colors: one per tag category */
+  --color-hold-yellow: #ffc531;  /* Grading */
+  --color-hold-teal: #12b5a5;    /* Setting style */
+  --color-hold-purple: #8e5cf7;  /* Who it suits */
+  --color-hold-orange: #ff7b22;  /* Crowding */
+  --color-hold-blue: #2f6bff;    /* Setting frequency */
+
+  /* Type (font files come from next/font in layout.js) */
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-2xl: 40px;
+  --text-3xl: 64px;
+  --text-4xl: 96px;
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+  --leading-tight: 1;
+  --leading-snug: 1.2;
+  --leading-normal: 1.5;
+
+  /* Spacing */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --opacity-subtle: 16%;
+  --opacity-muted: 60%;
+
+  --container-prose: 640px;
+  --container-page: 1200px;
+
+  /* Breakpoints (reference only: CSS variables can't be used inside @media)
+     sm 640px · md 768px · lg 1024px · xl 1280px */
+
+  /* Reusable texture */
+  --texture-plywood: url("/illustrations/plywood-tile.svg");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
+/* ============================================================
+   Base styles
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
@@ -21,20 +93,31 @@ body {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-ink);
+  background: var(--color-background);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  /* Long words (e.g. "Queensbridge") wrap instead of pushing the page wider than the screen */
+  overflow-wrap: break-word;
 }
 
 a {
@@ -42,8 +125,172 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-hold-blue);
+  outline-offset: 2px;
+}
+
+/* Dropdown menus: our own arrow, with the text and the arrow the same distance from their edges.
+   12px from the left edge to the text, 12px from the arrow to the right edge (arrow is 12px, plus an 8px gap). */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-left: 12px !important;
+  padding-right: 32px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231a1714' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px !important;
+}
+
+/* Media never wider than its container */
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+/* Touch screens: make anything tappable at least 44px tall (Apple and Google's recommended minimum) */
+@media (pointer: coarse) {
+  button,
+  select,
+  summary,
+  input[type="search"] {
+    min-height: 44px;
+  }
+}
+
+/* Small uppercase label used across the site */
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* Filter dropdown look (components/FilterDropdown). Version A defaults; version B overrides in app/b/zine.css. */
+:root {
+  --filter-font: var(--font-body);
+  --filter-ink: var(--color-ink);
+  --filter-border: 1.5px solid var(--color-line);
+  --filter-radius: var(--radius-pill);
+  --filter-bg: var(--color-background);
+  --filter-hover-bg: var(--color-surface);
+  --filter-panel-border: 2px solid var(--color-ink);
+  --filter-panel-radius: var(--radius-md);
+  --filter-panel-bg: var(--color-background);
+  --filter-shadow: 4px 4px 0 var(--color-ink);
+}
+
+/* ============================================================
+   View transitions (React <ViewTransition> + the browser's View Transitions API)
+   ============================================================ */
+:root {
+  --vt-exit: 150ms;
+  --vt-enter: 220ms;
+  --vt-move: 380ms;
+}
+
+/* Clicks pass through to the live page while an animation runs */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Gym list: cards fade/scale out when filtered away, in when they come back. Moves animate by default. */
+::view-transition-old(.gym-exit) {
+  animation: var(--vt-exit) ease-in both vt-fade reverse, var(--vt-exit) ease-in both vt-shrink reverse;
+}
+
+::view-transition-new(.gym-enter) {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade, var(--vt-move) ease-out both vt-shrink;
+}
+
+::view-transition-group(*) {
+  animation-duration: var(--vt-move);
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Shared elements that morph between pages (e.g. a gym's name: card → page title) */
+::view-transition-group(.morph) {
+  animation-duration: 420ms;
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+/* Directional page slides: forward = into a gym, back = to the list */
+::view-transition-old(.nav-forward) {
+  --vt-offset: -60px;
+  animation: var(--vt-exit) ease-in both vt-fade reverse, var(--vt-move) ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-forward) {
+  --vt-offset: 60px;
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade, var(--vt-move) ease-in-out both vt-slide;
+}
+
+::view-transition-old(.nav-back) {
+  --vt-offset: 60px;
+  animation: var(--vt-exit) ease-in both vt-fade reverse, var(--vt-move) ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-back) {
+  --vt-offset: -60px;
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade, var(--vt-move) ease-in-out both vt-slide;
+}
+
+/* The site header stays put while pages slide underneath it */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes vt-fade {
+  from { opacity: 0; filter: blur(2px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@keyframes vt-shrink {
+  from { transform: scale(0.94); }
+  to { transform: scale(1); }
+}
+
+@keyframes vt-slide {
+  from { translate: var(--vt-offset); }
+  to { translate: 0; }
+}
+
+@keyframes vt-via-blur {
+  30% { filter: blur(3px); }
+}
+
+/* People who ask their device for less motion get instant changes instead */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

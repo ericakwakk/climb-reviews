@@ -1,0 +1,86 @@
+.header {
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-background);
+}
+
+.inner {
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: var(--spacing-4) var(--spacing-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.signup {
+  padding: var(--spacing-2) var(--spacing-4);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-primary-ink);
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.signup:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+
+/* On phones, keep only the essentials */
+@media (max-width: 640px) {
+  .inner {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  .nav {
+    gap: var(--spacing-3);
+  }
+
+  .logo {
+    font-size: var(--text-base);
+  }
+
+  .signup {
+    padding: 6px var(--spacing-3);
+  }
+
+  .nav > :first-child {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav > :nth-child(2) {
+    display: none; /* Saved: still reachable from the account area later */
+  }
+
+  .logo {
+    gap: var(--spacing-1);
+  }
+}

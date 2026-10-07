@@ -1,0 +1,35 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 5px var(--spacing-3) 5px 8px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-snug);
+  white-space: nowrap;
+}
+
+.selected {
+  border-color: var(--color-ink);
+  background: var(--color-background);
+}
+
+/* Category icon on a dot of the category's color */
+.badge {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-left: -4px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 50%;
+}
+
+.count {
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
