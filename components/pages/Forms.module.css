@@ -57,14 +57,19 @@
   color: var(--composer-muted, var(--color-ink-muted));
 }
 
-.field input,
+.field input:not([type="radio"], [type="checkbox"]),
 .field textarea {
   width: 100%;
-  padding: var(--spacing-3);
-  border: 1.5px solid var(--composer-line, var(--color-line));
+  min-height: var(--control-lg);
+  padding: 0 var(--field-pad);
+  border: 1.5px solid var(--composer-line, var(--color-field));
   border-radius: var(--composer-field-radius, var(--radius-md));
   background: var(--composer-bg, var(--color-background));
   font: inherit;
+}
+
+.field textarea {
+  padding: var(--spacing-3) var(--field-pad);
 }
 
 .field input:focus,
@@ -89,10 +94,12 @@
 }
 
 .choice {
+  min-height: var(--control-md);
+  white-space: nowrap;
+  padding: 0 var(--control-pad-md);
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
-  padding: 6px var(--spacing-3);
   border: 1.5px solid var(--composer-line, var(--color-line));
   border-radius: var(--composer-radius, var(--radius-pill));
   font-size: var(--text-sm);
@@ -106,13 +113,18 @@
 }
 
 .choice input {
+  margin: 0;
   accent-color: var(--composer-accent, var(--color-primary));
 }
 
 .primary,
 .secondary {
+  min-height: var(--control-lg);
+  padding: 0 var(--control-pad-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-start;
-  padding: var(--spacing-3) var(--spacing-6);
   border: 2px solid var(--composer-ink, var(--color-ink));
   border-radius: var(--composer-radius, var(--radius-pill));
   font-weight: var(--font-weight-bold);

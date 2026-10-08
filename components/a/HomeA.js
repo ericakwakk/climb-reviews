@@ -21,7 +21,7 @@ export default function HomeA({ gyms }) {
   const switchView = (v) => startTransition(() => setView(v));
 
   return (
-    <main>
+    <main id="main">
       {/* ---------- Top: title + search, small illustration on the side ---------- */}
       <section className={styles.top}>
         <div className={styles.intro}>
@@ -48,6 +48,7 @@ export default function HomeA({ gyms }) {
               id="search"
               name="q"
               type="search"
+              autoComplete="off" // no browser search history dropdown
               placeholder="Gym or city"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -104,6 +105,7 @@ export default function HomeA({ gyms }) {
           )}
         </div>
 
+        <h2 className="sr-only">Gyms</h2>
         <div className={styles.listHeader}>
           <p className={styles.count} aria-live="polite">
             <strong>

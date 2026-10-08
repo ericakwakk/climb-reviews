@@ -11,18 +11,15 @@
   inset: 0;
 }
 
-.art > * {
+.routes {
+  /* From just right of the search panel (560px wide) to the page edge, routes standing on the floor */
+  --page-edge: max(0px, calc((100% - var(--container-page)) / 2));
   position: absolute;
+  top: var(--spacing-6);
+  bottom: 0;
+  left: calc(var(--page-edge) + var(--spacing-6) + 560px + var(--spacing-6));
+  right: var(--page-edge);
 }
-
-.v1 { left: 56%; top: 8%; }
-.v2 { left: 76%; top: 44%; }
-.v3 { left: 82%; top: 2%; }
-
-.h1 { left: 64%; top: 64%; }
-.h2 { left: 74%; top: 22%; }
-.h3 { left: 92%; top: 74%; }
-.h4 { left: 50%; top: 76%; }
 
 /* The search panel area: same width as the page content, panel on the left */
 .content {
@@ -34,13 +31,10 @@
 }
 
 @media (max-width: 900px) {
-  .v1 { left: 62%; top: 2%; width: 150px; }
-  .v2,
-  .v3,
-  .h2,
-  .h3 { display: none; }
-  .h1 { left: 78%; top: 70%; }
-  .h4 { display: none; }
+  .routes {
+    left: 0;
+    right: 0;
+  }
 
   .content {
     padding: var(--spacing-24) var(--spacing-4) var(--spacing-6);

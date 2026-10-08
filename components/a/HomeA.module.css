@@ -32,7 +32,7 @@
   align-items: center;
   max-width: 36rem;
   margin-top: var(--spacing-2);
-  padding: 6px 6px 6px var(--spacing-4);
+  padding: 4px 4px 4px var(--spacing-2);
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-pill);
   background: var(--color-background);
@@ -47,7 +47,8 @@
 .search input {
   flex: 1;
   min-width: 0;
-  padding: var(--spacing-3);
+  min-height: var(--control-lg);
+  padding: 0 var(--spacing-3);
   border: none;
   background: transparent;
   font-size: var(--text-base);
@@ -55,7 +56,11 @@
 }
 
 .search button {
-  padding: var(--spacing-3) var(--spacing-6);
+  min-height: var(--control-lg);
+  padding: 0 var(--control-pad-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-pill);
   background: var(--color-primary);
@@ -132,8 +137,9 @@
 }
 
 .sort select {
+  height: var(--control-md);
   padding: var(--spacing-2) var(--spacing-3);
-  border: 1.5px solid var(--color-line);
+  border: 1.5px solid var(--color-field);
   border-radius: var(--radius-pill);
   background: var(--color-background);
   font-weight: var(--font-weight-medium);
@@ -142,6 +148,7 @@
 
 .toggle {
   display: flex;
+  height: var(--control-md);
   padding: 3px;
   border: 1.5px solid var(--color-ink);
   border-radius: var(--radius-pill);
@@ -150,7 +157,7 @@
 .toggle button {
   display: grid;
   place-items: center;
-  padding: 6px var(--spacing-3);
+  padding: 0 var(--control-pad-sm);
   border: none;
   border-radius: var(--radius-pill);
   background: transparent;
@@ -196,7 +203,11 @@
 }
 
 .suggestLink {
-  padding: var(--spacing-2) var(--spacing-4);
+  min-height: var(--control-md);
+  padding: 0 var(--control-pad-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-pill);
   font-size: var(--text-sm);
@@ -229,7 +240,7 @@
 
 @media (max-width: 400px) {
   .search button {
-    padding: var(--spacing-2) var(--spacing-4);
+    padding: 0 var(--control-pad-md);
   }
 }
 
@@ -243,10 +254,11 @@
 }
 
 .chip {
+  min-height: var(--control-sm);
+  padding: 0 var(--control-pad-sm);
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
-  padding: 4px var(--spacing-3);
   border: 1.5px solid var(--color-ink);
   border-radius: var(--radius-pill);
   background: var(--color-ink);
@@ -262,7 +274,11 @@
 }
 
 .clearAll {
-  padding: 4px var(--spacing-2);
+  min-height: var(--control-sm);
+  padding: 0 var(--control-pad-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   background: none;
   font-size: var(--text-sm);
@@ -293,4 +309,20 @@
   font-size: var(--text-lg);
   font-weight: var(--font-weight-extrabold);
   color: var(--color-ink);
+}
+
+/* Focus: the box lifts like a sticker and its shadow turns pink (the input hides its own outline) */
+.search {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search:focus-within {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search {
+    transition: none;
+  }
 }

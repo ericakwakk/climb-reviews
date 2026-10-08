@@ -65,7 +65,7 @@
   --filter-panel-border: 3px solid var(--zine-ink);
   --filter-panel-radius: 0;
   --filter-panel-bg: var(--zine-paper);
-  --filter-shadow: 6px 6px 0 var(--zine-pink);
+  --filter-shadow: none; /* the thick border is enough; an offset shadow was noise */
 }
 
 /* Version B look for the shared map */

@@ -132,3 +132,8 @@
 - **Pins show the overall rating** (closed MPHC is a grey "Closed" pin). Tapping a pin grows a preview card on the map instead of jumping to a new page. The map follows the same filters as the list and zooms to fit the results.
 - **Usage safety:** billed per map load (opening the map), not per interaction. Budget alert at $5 on real usage. Google wouldn't let this account adjust the daily/per-minute map-load quotas, so the safety net is the free trial (no charges without upgrading), the budget alert, and locking the key to my exact site at deploy. Revisit caps before ever upgrading.
 - **Not searchable while it's a prototype:** "noindex" in every page's code plus an X-Robots-Tag header on every response. robots.txt allows crawling on purpose: blocking it would hide the noindex instructions, and a shared link could still get listed. Remove all of it at launch.
+
+## 2026-10-07: Control sizes and design system page
+- Buttons, chips, dropdowns and fields were 31–66px tall with mixed padding. Now three sizes only: 48 / 40 / 32px (tokens --control-lg/md/sm), fixed height with centered text, side padding 24 / 16 / 12. Tags 28px. Why: consistent rhythm; padding is decided once, not per component.
+- Bug fixed: the form's text-field style was also hitting radio buttons, which made the "Type of climbing" pills 57px tall.
+- Design system written up in docs/design-system.md for the portfolio. (A /design-system page on the site was tried and removed: it's a portfolio artifact, not a site feature.)

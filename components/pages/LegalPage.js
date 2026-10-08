@@ -5,7 +5,7 @@ import styles from "./LegalPage.module.css";
 // Used by both design versions (each wraps it in its own header/footer and fonts).
 export default function LegalPage({ title, intro, children }) {
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <header className={styles.header}>
         <p className={styles.updated}>Last updated {LEGAL_UPDATED} · Draft</p>
         <h1 className={styles.title}>{title}</h1>

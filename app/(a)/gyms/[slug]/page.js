@@ -51,7 +51,7 @@ export default async function GymPage({ params }) {
 
   return (
     <PageTransition>
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <Link href="/" transitionTypes={["nav-back"]} className={styles.back}>← All gyms</Link>
 
       {/* ---------- Header ---------- */}
@@ -209,7 +209,7 @@ function ClosedGymPage({ gym }) {
 
   return (
     <PageTransition>
-    <main className={`${styles.page} ${styles.closedPage}`}>
+    <main id="main" className={`${styles.page} ${styles.closedPage}`}>
       <Link href="/" transitionTypes={["nav-back"]} className={styles.back}>← All gyms</Link>
 
       <header className={styles.header}>
@@ -226,75 +226,18 @@ function ClosedGymPage({ gym }) {
 
       <div className={styles.columns}>
         <div className={styles.main}>
-          <section className={styles.section}>
-            <div className={styles.sectionHead}>
-              <h2>In memory</h2>
-              <p>{story.closedOn}</p>
-            </div>
-            <p className={styles.storyIntro}>{story.intro}</p>
-            <dl className={styles.storyNumbers}>
-              {story.numbers.map((n) => (
-                <div key={n.label}>
-                  <dt>{n.label}</dt>
-                  <dd>{n.value}</dd>
-                </div>
+          {/* The story, in my own words (lib/closedGyms.js). Nothing shows until it's written. */}
+          {story.text.length > 0 && (
+            <section className={styles.section}>
+              <div className={styles.sectionHead}>
+                <h2>In memory</h2>
+                <p>{story.closedOn}</p>
+              </div>
+              {story.text.map((paragraph, i) => (
+                <p key={i} className={styles.storyIntro}>{paragraph}</p>
               ))}
-            </dl>
-          </section>
-
-          <section className={styles.section}>
-            <div className={styles.sectionHead}>
-              <h2>Timeline</h2>
-            </div>
-            <ol className={styles.timeline}>
-              {story.timeline.map((item) => (
-                <li key={item.when}>
-                  <p className={styles.when}>{item.when}</p>
-                  <p>{item.what}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section className={styles.section}>
-            <div className={styles.sectionHead}>
-              <h2>Photos</h2>
-              <p>Shared with permission</p>
-            </div>
-            <div className={styles.photoGrid}>
-              {[1, 2, 3, 4].map((n) => (
-                <figure key={n} className={styles.photoSlot}>
-                  <span>Photo to come</span>
-                </figure>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.section}>
-            <div className={styles.sectionHead}>
-              <h2>Memories</h2>
-              <p>From the people who climbed here</p>
-            </div>
-            <div className={styles.memoryList}>
-              {[1, 2].map((n) => (
-                <blockquote key={n} className={styles.memorySlot}>
-                  <p>A memory from a climber will go here.</p>
-                  <footer>Name, years climbed here</footer>
-                </blockquote>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.storySources}>
-            <h2>Sources</h2>
-            <ul>
-              {story.sources.map((src) => (
-                <li key={src.url}>
-                  <a href={src.url} target="_blank" rel="noopener noreferrer">{src.label}</a>
-                </li>
-              ))}
-            </ul>
-          </section>
+            </section>
+          )}
         </div>
 
         <aside className={styles.side}>

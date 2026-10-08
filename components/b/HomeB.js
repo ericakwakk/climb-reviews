@@ -21,7 +21,7 @@ export default function HomeB({ gyms }) {
   const switchView = (v) => startTransition(() => setView(v));
 
   return (
-    <main>
+    <main id="main">
       {/* ---------- Top: search panel sitting on the rock wall ---------- */}
       <RockWall>
         <div className={styles.panel}>
@@ -42,11 +42,12 @@ export default function HomeB({ gyms }) {
               id="search-b"
               name="q"
               type="search"
+              autoComplete="off" // no browser search history dropdown
               placeholder="Gym or city"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button type="submit" className="mono">Search →</button>
+            <button type="submit" className="mono">Search&nbsp;<span aria-hidden="true">→</span></button>
           </form>
         </div>
       </RockWall>
@@ -154,7 +155,7 @@ export default function HomeB({ gyms }) {
         {/* ---------- Missing a gym? ---------- */}
         <Link href="/b/submit" className={styles.suggest}>
           <span className={styles.suggestBig}>Missing a gym?</span>
-          <span className="mono">Suggest one and we&apos;ll add it →</span>
+          <span className="mono">Suggest one and we&apos;ll add it&nbsp;<span aria-hidden="true">→</span></span>
         </Link>
       </section>
     </main>

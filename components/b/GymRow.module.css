@@ -92,15 +92,15 @@
   }
 }
 
-/* ---------- Closed gyms: black and white, a little faded ---------- */
+/* ---------- Closed gyms: black and white on gray ----------
+   (Not faded with opacity: that dropped the text below readable contrast.) */
 .closed {
   filter: grayscale(1);
-  opacity: 0.7;
+  background: #f4f4f4;
 }
 
 .closed:hover {
-  opacity: 1;
-  background: #f2f2f2;
+  background: #ececec;
 }
 
 .closedText {

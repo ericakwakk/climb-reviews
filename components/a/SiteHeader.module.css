@@ -39,7 +39,11 @@
 }
 
 .signup {
-  padding: var(--spacing-2) var(--spacing-4);
+  min-height: var(--control-md);
+  padding: 0 var(--control-pad-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-pill);
   background: var(--color-primary);
@@ -67,7 +71,7 @@
   }
 
   .signup {
-    padding: 6px var(--spacing-3);
+    padding: 0 var(--control-pad-sm);
   }
 
 }

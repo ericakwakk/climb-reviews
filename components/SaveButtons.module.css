@@ -5,16 +5,16 @@
   gap: var(--spacing-2);
 }
 
-.save {
+.save,
+.segment {
+  min-height: var(--control-md);
+  padding: 0 var(--control-pad-md);
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
-  padding: var(--spacing-2) var(--spacing-4);
   /* Optical adjustment: the icon has a few px of empty space built into its drawing,
      so trim the left padding to make the gap look the same as after the text */
   padding-left: calc(var(--spacing-4) - 4px);
-  border: 1.5px solid var(--save-ink, var(--color-ink));
-  border-radius: var(--save-radius, var(--radius-pill));
   background: var(--save-bg, var(--color-background));
   color: var(--save-ink, var(--color-ink));
   font-family: var(--save-font, inherit);
@@ -25,17 +25,46 @@
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.save:hover {
+.save {
+  border: 1.5px solid var(--save-ink, var(--color-ink));
+  border-radius: var(--save-radius, var(--radius-pill));
+}
+
+/* Want to go | Been here: one pill split in two, so they read as two stages of one thing */
+.switch {
+  display: inline-flex;
+  border: 1.5px solid var(--save-ink, var(--color-ink));
+  border-radius: var(--save-radius, var(--radius-pill));
+  overflow: hidden;
+}
+
+.segment {
+  border: none;
+}
+
+.segment + .segment {
+  border-left: 1.5px solid var(--save-ink, var(--color-ink));
+}
+
+/* The focus ring would be clipped by the pill's overflow, so draw it inside */
+.segment:focus-visible {
+  outline-offset: -5px;
+}
+
+.save:hover,
+.segment:hover {
   background: var(--save-hover, var(--color-surface));
 }
 
-.save[aria-pressed="true"] {
+.save[data-on="true"],
+.segment[data-on="true"] {
   background: var(--save-on-bg, var(--color-primary));
   color: var(--save-on-ink, var(--color-primary-ink));
 }
 
 /* A little "pop" when an icon is switched on */
-.save[aria-pressed="true"] .icon {
+.save[data-on="true"] .icon,
+.segment[data-on="true"] .icon {
   animation: pop 0.32s cubic-bezier(0.3, 1.6, 0.5, 1);
 }
 
@@ -46,7 +75,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .save[aria-pressed="true"] .icon {
+  .save[data-on="true"] .icon,
+  .segment[data-on="true"] .icon {
     animation: none;
   }
 }

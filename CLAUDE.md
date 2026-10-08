@@ -12,6 +12,7 @@ Tags are the core feature, not decoration. Climbers pick them from a fixed list,
 - Bias toward building something tangible and iterating. Fill in information gaps as we go instead of planning everything up front.
 - Keep explanations short and direct.
 - Log decisions (with the reason) in NOTES.md.
+- This project is my portfolio case study for design engineering roles; getting hired is the goal. Add every design decision to docs/decision-log.md, tagged USER CALL / AI PROPOSAL, USER ACCEPTED / AI MISTAKE, USER CAUGHT, and update docs/case-study-plan.md when something changes the story.
 
 ## Stack
 - Next.js App Router, plain JavaScript (no TypeScript), no src/ directory.
@@ -122,9 +123,12 @@ No deadline and no cut features. Build in this order so there's always a finishe
 - One primary accent: pink hold (--color-primary), used for main buttons and the overall rating highlight.
 - Each tag category has its own icon (components/Glyph.js), shown on a dot of the category's color. Icons are the main identifier, color is secondary. Amenities and price get icons on a neutral dot.
 - Illustrations: flat holds with ink outlines and a bolt hole, carabiners, and volumes. Components in components/illustrations/. (Rope and setter's tape were tried and cut: they looked random.)
+- Home page heroes (both versions) are a close-up of a set wall: components/illustrations/RouteWall.js draws wallLayout.js (parts of two routes around a volume) with hold silhouettes from wallHolds.js. Same flat style as the other illustrations: solid color, ink outline, one white bolt hole, no shading or inner detail. One color per route; big hand holds, small footholds in the route color; holds face the way they're pulled. Keep it calm: a close crop, not a whole wall (a detailed four-route version was tried and cut as distracting).
 - Volumes are POINTED shapes (three-sided pyramids, diamonds, fins), never cubes. They have bolt holes and often holds screwed onto their faces.
 - View toggles (cards/list vs map) use icons, not words.
 - Type: Bricolage Grotesque ExtraBold for display, DM Sans for body.
+- Control sizes (both versions): every button, chip, dropdown and field is --control-lg (48px, main actions + text fields), --control-md (40px, everyday buttons, dropdowns, pills) or --control-sm (32px, chips). Fixed height, text centered, side padding from --control-pad-*. Read-only tags are --tag-height (28px). Never set vertical padding on a control.
+- The design system is documented in docs/design-system.md (for the portfolio, not a site page). Update it when tokens change.
 - View transitions and shape morphing with Motion (level 4).
 
 ## Google Cloud safety checklist (before deploy / before upgrading the free trial)

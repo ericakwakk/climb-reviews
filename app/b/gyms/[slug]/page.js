@@ -46,7 +46,7 @@ export default async function GymPageB({ params }) {
 
   return (
     <PageTransition>
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <Link href="/b" transitionTypes={["nav-back"]} className={`mono ${styles.back}`}>← All gyms</Link>
 
       {/* ---------- Header ---------- */}
@@ -156,14 +156,14 @@ export default async function GymPageB({ params }) {
               <LineHold shape={3} color="var(--zine-blue)" size={120} rotate={-12} />
               <h2>No reviews yet.</h2>
               <p>Climbed here? Tell other climbers what it&apos;s like: the grades, the setting, the crowd.</p>
-              <ReviewComposer gym={gym} label="Write the first review →" className={styles.firstReview} />
+              <ReviewComposer gym={gym} base="/b" label="Write the first review →" className={styles.firstReview} />
             </section>
           )}
         </div>
 
         {/* ---------- Sidebar ---------- */}
         <aside className={styles.side}>
-          {hasReviews && <ReviewComposer gym={gym} label="Write a review →" />}
+          {hasReviews && <ReviewComposer gym={gym} base="/b" label="Write a review →" />}
 
           {/* Prices: facts I enter, so they show when they were last checked */}
           <section className={styles.prices}>
@@ -216,7 +216,7 @@ function ClosedGymPageB({ gym }) {
 
   return (
     <PageTransition>
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <Link href="/b" transitionTypes={["nav-back"]} className={`mono ${styles.back}`}>← All gyms</Link>
 
       <header>
@@ -233,72 +233,18 @@ function ClosedGymPageB({ gym }) {
 
       <div className={styles.columns}>
         <div className={styles.main}>
-          <section>
-            <div className={styles.sectionHead}>
-              <h2>In memory</h2>
-              <p className="mono">{story.closedOn}</p>
-            </div>
-            <p className={styles.storyIntro}>{story.intro}</p>
-            <div className={styles.storyNumbers}>
-              {story.numbers.map((n) => (
-                <div key={n.label}>
-                  <p className="mono">{n.label}</p>
-                  <p className={styles.bigNumber}>{n.value}</p>
-                </div>
+          {/* The story, in my own words (lib/closedGyms.js). Nothing shows until it's written. */}
+          {story.text.length > 0 && (
+            <section>
+              <div className={styles.sectionHead}>
+                <h2>In memory</h2>
+                <p className="mono">{story.closedOn}</p>
+              </div>
+              {story.text.map((paragraph, i) => (
+                <p key={i} className={styles.storyIntro}>{paragraph}</p>
               ))}
-            </div>
-          </section>
-
-          <section>
-            <div className={styles.sectionHead}>
-              <h2>Timeline</h2>
-            </div>
-            <ol className={styles.timeline}>
-              {story.timeline.map((item) => (
-                <li key={item.when}>
-                  <p className="mono">{item.when}</p>
-                  <p className={styles.timelineText}>{item.what}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section>
-            <div className={styles.sectionHead}>
-              <h2>Photos</h2>
-              <p className="mono">Shared with permission</p>
-            </div>
-            <div className={styles.photoGrid}>
-              {[1, 2, 3, 4].map((n) => (
-                <figure key={n} className={`mono ${styles.photoSlot}`}>Photo to come</figure>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <div className={styles.sectionHead}>
-              <h2>Memories</h2>
-              <p className="mono">From the people who climbed here</p>
-            </div>
-            {[1, 2].map((n) => (
-              <article key={n} className={styles.review}>
-                <span className={styles.quoteMark} aria-hidden="true">“</span>
-                <p className={styles.reviewBody}>A memory from a climber will go here.</p>
-                <p className="mono">— Name, years climbed here</p>
-              </article>
-            ))}
-          </section>
-
-          <section className={styles.storySources}>
-            <p className="mono">Sources</p>
-            <ul>
-              {story.sources.map((src) => (
-                <li key={src.url}>
-                  <a href={src.url} target="_blank" rel="noopener noreferrer">{src.label}</a>
-                </li>
-              ))}
-            </ul>
-          </section>
+            </section>
+          )}
         </div>
 
         <aside className={styles.side}>

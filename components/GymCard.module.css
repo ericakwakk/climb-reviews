@@ -79,14 +79,11 @@
   color: var(--color-ink-muted);
 }
 
-/* ---------- Closed gyms: black and white, a little faded ---------- */
+/* ---------- Closed gyms: black and white on a gray card ----------
+   (Not faded with opacity: that dropped the text below readable contrast.) */
 .closed {
   filter: grayscale(1);
-  opacity: 0.72;
-}
-
-.closed:hover {
-  opacity: 1;
+  background: var(--color-surface);
 }
 
 .closed .type {

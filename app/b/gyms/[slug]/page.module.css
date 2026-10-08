@@ -55,7 +55,11 @@
 }
 
 .actions button {
-  padding: 6px 12px;
+  min-height: var(--control-md);
+  padding: 0 var(--control-pad-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1.5px solid var(--zine-ink);
   background: var(--zine-paper);
   cursor: pointer;
@@ -280,8 +284,12 @@
 
 /* ---------- Sidebar ---------- */
 .primary {
+  min-height: var(--control-lg);
+  padding: 0 var(--control-pad-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: var(--spacing-4);
   border: 3px solid var(--zine-ink);
   background: var(--zine-blue);
   color: var(--zine-paper);
@@ -298,8 +306,12 @@
 }
 
 .empty .primary {
+  min-height: var(--control-lg);
+  padding: 0 var(--control-pad-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: auto;
-  padding: var(--spacing-3) var(--spacing-6);
 }
 
 .prices {
@@ -390,88 +402,6 @@
   line-height: 1.5;
 }
 
-.storyNumbers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: var(--spacing-8);
-  border: 3px solid var(--zine-ink);
-}
-
-.storyNumbers > div {
-  padding: var(--spacing-4);
-}
-
-.storyNumbers > div + div {
-  border-left: 1.5px solid var(--zine-ink);
-}
-
-@media (max-width: 640px) {
-  .storyNumbers {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .storyNumbers > div:nth-child(3) {
-    border-left: none;
-  }
-
-  .storyNumbers > div:nth-child(n + 3) {
-    border-top: 1.5px solid var(--zine-ink);
-  }
-}
-
-.timeline {
-  list-style: none;
-}
-
-.timeline li {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4) 0;
-  border-bottom: 1.5px dashed var(--zine-ink);
-}
-
-.timelineText {
-  max-width: var(--container-prose);
-}
-
-@media (max-width: 640px) {
-  .timeline li {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-1);
-  }
-}
-
-.photoGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-4);
-}
-
-.photoSlot {
-  aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
-  border: 2px dashed var(--zine-ink);
-  color: var(--zine-ink-muted);
-}
-
-.storySources {
-  padding-top: var(--spacing-4);
-  border-top: 3px solid var(--zine-ink);
-  font-size: var(--text-sm);
-}
-
-.storySources ul {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  margin-top: var(--spacing-2);
-}
-
-.storySources a {
-  text-decoration: underline;
-}
 
 /* Phones: big numbers scale down so score and story blocks fit */
 @media (max-width: 640px) {
@@ -481,11 +411,6 @@
 
   .overallScore .bigNumber {
     font-size: 56px;
-  }
-
-  .scores > div,
-  .storyNumbers > div {
-    min-width: 0;
   }
 
   .note {
@@ -504,9 +429,6 @@
     border-top: 1.5px solid var(--zine-ink);
   }
 
-  .storyNumbers .bigNumber {
-    font-size: var(--text-xl);
-  }
 }
 
 .firstReview {

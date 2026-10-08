@@ -3,21 +3,16 @@
   height: 340px;
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-xl);
-  background: var(--texture-plywood);
+  /* Plain plywood: RouteWall draws the t-nut dots itself, so holds can bolt onto them exactly */
+  background: var(--color-plywood);
   overflow: hidden;
 }
 
-/* Every illustration is placed absolutely on the wall */
-.wall > * {
-  position: absolute;
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-
-.h1 { top: 30%; left: 8%; }
-.h2 { top: 10%; left: 18%; }
-.h3 { top: 66%; left: 66%; }
-.h4 { top: 14%; left: 74%; }
-.volume { top: 44%; left: 30%; }
-.h6 { top: 50%; left: 82%; }
 
 /* On phones, skip the illustration so the gyms show up sooner */
 @media (max-width: 640px) {

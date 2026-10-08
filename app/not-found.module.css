@@ -26,8 +26,12 @@
 }
 
 .link {
+  min-height: var(--control-lg);
+  padding: 0 var(--control-pad-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-top: var(--spacing-4);
-  padding: var(--spacing-3) var(--spacing-6);
   border: 2px solid var(--color-ink);
   border-radius: var(--radius-pill);
   background: var(--color-primary);

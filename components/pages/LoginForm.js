@@ -16,7 +16,7 @@ export default function LoginForm({ base = "" }) {
   }
 
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <div className={styles.card}>
         <h1 className={styles.title}>Log in or sign up</h1>
         <p className={styles.lede}>

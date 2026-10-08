@@ -34,7 +34,7 @@ export default function ReviewsB({ reviews }) {
         <div className={styles.row}>
           <label className={styles.search}>
             <span className={styles.srOnly}>Search reviews</span>
-            <input type="search" placeholder="Search reviews" value={query} onChange={(e) => setQuery(e.target.value)} />
+            <input type="search" autoComplete="off" placeholder="Search reviews" value={query} onChange={(e) => setQuery(e.target.value)} />
           </label>
           <label className={`mono ${styles.sort}`}>
             Sort

@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { startTransition, useEffect, useRef, useState, ViewTransition } from "react";
 import Glyph from "./Glyph";
 import RatingInput from "./RatingInput";
 import { categoryColor, RATING_FIELDS } from "@/lib/gymDisplay";
 import { AMENITIES, TAG_LIST } from "@/lib/tags";
 import { CLIMBER_QUESTIONS } from "@/lib/climberInfo";
+import { useSignedIn } from "@/lib/session";
 import styles from "./ReviewComposer.module.css";
 
 const EMPTY_RATINGS = { overall: 0, community: 0, setting: 0, value: 0 };
@@ -13,14 +15,16 @@ const EMPTY_RATINGS = { overall: 0, community: 0, setting: 0, value: 0 };
 // "Write a review": the button morphs into a review sheet (and back when you close it).
 // Both the button and the sheet use the same view-transition name, so the browser animates
 // one shape into the other, like iOS sheets growing out of the button that opened them.
-export default function ReviewComposer({ gym, label = "Write a review", className = "" }) {
+// Posting needs an account, so signed-out visitors get "Log in to write a review" instead, up front,
+// rather than finding out after filling in the whole form.
+export default function ReviewComposer({ gym, label = "Write a review", base = "", className = "" }) {
+  const signedIn = useSignedIn();
   const [open, setOpen] = useState(false);
   const [ratings, setRatings] = useState(EMPTY_RATINGS);
   const [tags, setTags] = useState([]);
   const [amenities, setAmenities] = useState([]);
   const [body, setBody] = useState("");
   const [climber, setClimber] = useState({}); // optional "About you" answers
-  const [notice, setNotice] = useState("");
   const sheetRef = useRef(null);
   const name = `review-composer-${gym.slug}`;
 
@@ -61,15 +65,35 @@ export default function ReviewComposer({ gym, label = "Write a review", classNam
 
   function handleSubmit(e) {
     e.preventDefault();
-    // No accounts or database yet: the form works, but posting comes with sign-in.
-    setNotice("Posting reviews comes with sign-in, which is next on the build list. Your answers aren't saved yet.");
+    // TODO(sign-in step): save the review with a Server Action
+  }
+
+  const arrow = label.endsWith(" →");
+  const withArrow = (text) =>
+    arrow ? (
+      <>
+        {text}&nbsp;<span aria-hidden="true">→</span>
+      </>
+    ) : (
+      text
+    );
+
+  if (!signedIn) {
+    return (
+      <Link
+        href={`${base}/login?next=${encodeURIComponent(`${base}/gyms/${gym.slug}`)}`}
+        className={`${styles.trigger} ${className}`}
+      >
+        {withArrow("Log in to write a review")}
+      </Link>
+    );
   }
 
   if (!open) {
     return (
       <ViewTransition name={name} share="morph" default="none">
         <button type="button" className={`${styles.trigger} ${className}`} onClick={openSheet}>
-          {label}
+          {withArrow(arrow ? label.slice(0, -2) : label)}
         </button>
       </ViewTransition>
     );
@@ -208,7 +232,6 @@ export default function ReviewComposer({ gym, label = "Write a review", classNam
           </div>
 
           <footer className={styles.foot}>
-            {notice && <p className={styles.notice} role="status">{notice}</p>}
             <div className={styles.actions}>
               <button type="button" className={styles.cancel} onClick={closeSheet}>
                 Cancel

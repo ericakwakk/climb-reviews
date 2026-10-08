@@ -12,10 +12,11 @@
 }
 
 .topic {
+  min-height: var(--control-sm);
+  padding: 0 var(--control-pad-sm);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px var(--spacing-3);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius-pill);
   background: var(--color-background);
@@ -55,8 +56,9 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  padding: 0 var(--spacing-3);
-  border: 1.5px solid var(--color-line);
+  min-height: var(--control-md);
+  padding: 0 var(--control-pad-md);
+  border: 1.5px solid var(--color-field);
   border-radius: var(--radius-pill);
   color: var(--color-ink-muted);
 }
@@ -68,7 +70,7 @@
 .search input {
   flex: 1;
   min-width: 0;
-  padding: var(--spacing-2) 0;
+  padding: 0;
   border: none;
   background: transparent;
   outline: none;
@@ -76,9 +78,10 @@
 }
 
 .sort select {
+  height: var(--control-md);
   height: 100%;
   padding: var(--spacing-2) var(--spacing-3);
-  border: 1.5px solid var(--color-line);
+  border: 1.5px solid var(--color-field);
   border-radius: var(--radius-pill);
   background: var(--color-background);
   font-weight: var(--font-weight-medium);

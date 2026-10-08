@@ -2,7 +2,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  min-height: var(--tag-height);
+  padding: 0 var(--spacing-3);
   border: 1.5px solid var(--zine-ink);
   background: var(--zine-paper);
   font-size: var(--text-sm);

@@ -37,7 +37,7 @@ export default function ReviewsA({ reviews }) {
               <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="2.5" />
               <path d="M16.5 16.5 L21 21" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
-            <input type="search" placeholder="Search reviews" value={query} onChange={(e) => setQuery(e.target.value)} />
+            <input type="search" autoComplete="off" placeholder="Search reviews" value={query} onChange={(e) => setQuery(e.target.value)} />
           </label>
           <label className={styles.sort}>
             <span className={styles.srOnly}>Sort reviews</span>

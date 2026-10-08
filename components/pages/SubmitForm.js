@@ -35,7 +35,7 @@ export default function SubmitForm() {
 
   if (sent) {
     return (
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         <div className={styles.card}>
           <h1 className={styles.title}>Thanks for the suggestion</h1>
           <p className={styles.lede}>
@@ -51,7 +51,7 @@ export default function SubmitForm() {
   }
 
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <div className={styles.card}>
         <h1 className={styles.title}>Suggest a gym</h1>
         <p className={styles.lede}>
@@ -96,7 +96,7 @@ export default function SubmitForm() {
 
           <label className={styles.field}>
             <span className={styles.label}>Anything else? <span className={styles.optional}>Optional</span></span>
-            <textarea rows={4} value={form.notes} onChange={update("notes")} placeholder="Opening date, what makes it special..." />
+            <textarea rows={4} value={form.notes} onChange={update("notes")} />
           </label>
 
           <button type="submit" className={styles.primary}>

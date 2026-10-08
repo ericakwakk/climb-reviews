@@ -4,8 +4,8 @@ import styles from "./PrototypeBanner.module.css";
 // so nobody mistakes them for real reviews. Remove when real reviews replace the samples.
 export default function PrototypeBanner() {
   return (
-    <p className={styles.banner} role="note">
+    <aside className={styles.banner} aria-label="Prototype notice">
       <strong>Prototype.</strong> Gym details are real; ratings and reviews are sample data, not real reviews.
-    </p>
+    </aside>
   );
 }

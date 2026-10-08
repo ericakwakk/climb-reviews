@@ -8,7 +8,8 @@
   --color-surface: #f6f3ee;      /* chalk dust: subtle surfaces, chips, inputs */
   --color-ink: #1a1714;          /* shoe rubber: text, outlines */
   --color-ink-muted: #5e574f;    /* secondary text */
-  --color-line: #e7e1d8;         /* hairlines */
+  --color-line: #e7e1d8;         /* hairlines (decorative only, never a field's only border) */
+  --color-field: #8c847a;        /* input and select borders: 3.7:1 on white, meets WCAG 1.4.11 */
   --color-plywood: #ebcba0;      /* plywood panel: feature surfaces only */
   --color-plywood-dot: #b98f5f;  /* t-nut bolt holes */
 
@@ -63,6 +64,18 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-pill: 999px;
+
+  /* Controls: every button, chip, dropdown and field uses one of three sizes.
+     lg = main actions and text fields, md = everyday buttons and dropdowns, sm = chips.
+     Side padding grows with size so text never looks cramped or floaty. */
+  --control-lg: 48px;
+  --control-md: 40px;
+  --control-sm: 32px;
+  --control-pad-lg: 24px;
+  --control-pad-md: 16px;
+  --control-pad-sm: 12px;
+  --field-pad: 16px;          /* text inside inputs and textareas */
+  --tag-height: 28px;         /* read-only tags (not clickable) */
 
   --opacity-subtle: 16%;
   --opacity-muted: 60%;
@@ -142,15 +155,18 @@ select {
 }
 
 /* Dropdown menus: our own arrow, with the text and the arrow the same distance from their edges.
-   12px from the left edge to the text, 12px from the arrow to the right edge (arrow is 12px, plus an 8px gap). */
+   16px from the left edge to the text, 16px from the arrow to the right edge (arrow is 12px, plus an 8px gap). */
 select {
   appearance: none;
   -webkit-appearance: none;
-  padding-left: 12px !important;
-  padding-right: 32px !important;
+  min-height: var(--control-md);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: var(--control-pad-md) !important;
+  padding-right: 36px !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231a1714' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
-  background-position: right 12px center !important;
+  background-position: right 16px center !important;
   background-size: 12px !important;
 }
 
@@ -169,6 +185,43 @@ video {
   input[type="search"] {
     min-height: 44px;
   }
+}
+
+/* Placeholder text: readable (browser default gray is only 2.4:1) */
+::placeholder {
+  color: var(--color-ink-muted);
+  opacity: 1;
+}
+
+/* Text only screen readers hear */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to content": hidden until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: var(--spacing-2);
+  left: var(--spacing-2);
+  z-index: 1000;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-background);
+  font-weight: var(--font-weight-bold);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
 }
 
 /* Small uppercase label used across the site */

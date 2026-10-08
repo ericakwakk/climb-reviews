@@ -7,9 +7,9 @@ import GymRow from "@/components/b/GymRow";
 import styles from "./SavedGyms.module.css";
 
 const LISTS = [
-  { key: "favorite", title: "Favorites", empty: "Tap Favorite on a gym's page to keep it here." },
-  { key: "want_to_visit", title: "Want to visit", empty: "Tap Want to visit on a gym's page to plan your next session." },
-  { key: "visited", title: "Visited", empty: "Tap Visited on a gym's page to keep track of where you've climbed." },
+  { key: "favorite", title: "Favorites", empty: "Choose Favorite on a gym's page to keep it here." },
+  { key: "want_to_visit", title: "Want to go", empty: "Choose Want to go on a gym's page to plan your next session." },
+  { key: "visited", title: "Been here", empty: "Choose Been here on a gym's page to keep track of where you've climbed." },
 ];
 
 // Your three lists of saved gyms. For now they're read from this browser's storage (same place the
@@ -32,7 +32,7 @@ export default function SavedGyms({ gyms, variant = "a" }) {
   const inList = (key) => (saved ? gyms.filter((g) => saved[g.slug]?.includes(key)) : []);
 
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Saved gyms</h1>
         <p className={styles.note}>
@@ -65,7 +65,7 @@ export default function SavedGyms({ gyms, variant = "a" }) {
               )
             ) : (
               <p className={styles.empty}>
-                {list.empty} <Link href={base || "/"}>Browse gyms →</Link>
+                {list.empty} <Link href={base || "/"}>Browse gyms&nbsp;<span aria-hidden="true">→</span></Link>
               </p>
             )}
           </section>

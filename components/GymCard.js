@@ -40,7 +40,7 @@ export default function GymCard({ gym }) {
       {closed ? (
         // Closed gyms: no price or rating, just a line about them and a link to their story
         <p className={styles.closedText}>
-          {story.cardLine}. <span>{story.closedOn}. Read its story →</span>
+          {story.cardLine}. <span>{story.closedOn}. Read its story&nbsp;<span aria-hidden="true">→</span></span>
         </p>
       ) : (
         <>

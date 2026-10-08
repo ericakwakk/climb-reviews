@@ -13,7 +13,11 @@
 }
 
 .topic {
-  padding: 4px 10px;
+  min-height: var(--control-sm);
+  padding: 0 var(--control-pad-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1.5px solid var(--zine-ink);
   background: var(--zine-paper);
   cursor: pointer;
@@ -51,9 +55,10 @@
 }
 
 .search input {
+  min-height: var(--control-md);
   flex: 1;
   min-width: 0;
-  padding: var(--spacing-2) var(--spacing-3);
+  padding: 0 var(--field-pad);
   border: none;
   background: transparent;
   outline: none;
@@ -66,6 +71,7 @@
 }
 
 .sort select {
+  height: var(--control-md);
   padding: 6px 8px;
   border: 1.5px solid var(--zine-ink);
   border-radius: 0;
@@ -159,4 +165,20 @@
   padding: 2px 8px;
   border: 1.5px solid var(--zine-ink);
   background: var(--zine-yellow);
+}
+
+/* Focus: the box lifts and gets a pink offset shadow (the input hides its own outline) */
+.search {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search:focus-within {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--zine-pink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search {
+    transition: none;
+  }
 }

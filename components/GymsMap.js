@@ -89,7 +89,7 @@ export default function GymsMap({ gyms, hrefFor }) {
                 </p>
               )}
               <Link href={hrefFor(active.slug)} transitionTypes={["nav-forward"]} className={styles.cardLink}>
-                {active.status === "closed" ? "Read its story →" : "View gym →"}
+                {active.status === "closed" ? "Read its story" : "View gym"}&nbsp;<span aria-hidden="true">→</span>
               </Link>
             </div>
           </ViewTransition>
